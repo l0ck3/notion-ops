@@ -1,0 +1,11 @@
+{
+  "name": "notion-ops",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",  
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index"
+  }  
+}
