@@ -2,10 +2,14 @@
   "name": "notion-ops",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",  
-  "dependencies": {},
+  "license": "MIT",
+  "dependencies": {
+    "@notionhq/client": "^0.4.13",
+    "axios": "^0.25.0",
+    "dotenv": "^16.0.0"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "node index"
-  }  
+  }
 }
