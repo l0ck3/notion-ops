@@ -3,12 +3,20 @@ require("dotenv").config();
 const qoveryClient = require("./src/apis/qovery");
 const notionClient = require("./src/apis/notion");
 
-const createNotionProjects = async (projectsList) => {
-  await Promise.all(projectsList.map((project) => (
-    notionClient.createOrUpdateProject(project)
-  )))
+const refreshNotion = async () => {
+  const projects = await qoveryClient.listProjects();
+  
+  for (project of projects) {
+    const notionProject = await notionClient.createOrUpdateProject(project);
+    const apps = await qoveryClient.listAllApplications(project.id);
+
+    for (app of apps) {
+      await notionClient.createOrUpdateApplication(notionProject.id, app)
+    }
+  }
 }
 
-qoveryClient.listProjects()
-  .then(async (projects) => await createNotionProjects(projects))
+refreshNotion()
+  .then(async => console.log("SUCCESS", "Notion has been refreshed"))
   .catch((e) => console.log("ERROR", e.message));
+
